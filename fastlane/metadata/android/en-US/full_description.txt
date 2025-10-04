@@ -3,5 +3,6 @@ USB Camera Viewer is a simple Android app to view a video stream from a connecte
 There are no controls or configuration - the app automatically detects the camera and uses the highest resolution possible. The video stream takes up the device's entire screen, so some distortion is possible.
 
 This app requires two permissions:
+
 - Camera permission is required to access USB cameras. The app does not take pictures nor record video.
 - Record audio permission is required to automatically launch the app when USB camera is connected. The app does not record any audio. (Without this permission, when USB camera is connected, Android will display the "launch with" prompt, but the "Always" option for USB Camera Viewer will be unavailable)
