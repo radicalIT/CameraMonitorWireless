@@ -1,39 +1,25 @@
-# Android USB Camera Viewer
+# CameraMonitorWireless
 
-Simple Android app to display video feed from a connected USB camera. There are no controls or configuration - the app automatically detects the camera and displays the video using the highest resolution possible. The view area uses the most of the device's display, and might distort the original image.
+A wireless professional monitoring solution that receives video streams over the local network via HTTP MJPEG, providing mobility on set without sacrificing professional tools.
 
-The app is expected to work with any USB device that presents itself as a UVC camera, whether a webcam, a capture device, or any sort of a converter. The original use case is an in-car display for rear camera.
+## Connectivity
+* **MJPEG Streaming:** High-performance MJPEG decoding optimized for low-latency network environments.
+* **Dynamic Configuration:** Easily update and save stream URLs (e.g., `http://10.42.0.1:8080/stream`) directly from the side panel.
+* **Compatibility:** Ideal for use with DIY wireless transmitters based on Orange Pi, Raspberry Pi, or other MJPEG servers.
 
-## Permissions
+## Professional Analysis Tools
+Includes the full suite of image analysis tools found in the Pro version:
+* **Exposure Aids:** Zebra stripes and False Color mapping.
+* **Focus Tools:** Focus Peaking with variable sensitivity and color.
+* **Color Management:** Built-in S-Log3 to Rec.709 LUT.
+* **Advanced Scopes:** Real-time Luma Histogram and RGB Parade optimized for bitmap processing.
+* **Anamorphic Support:** Desqueeze options for anamorphic workflows.
 
-This app requires two permissions:
-- Camera permission is required to access USB cameras. The app does not take pictures nor record video.
-- Record audio permission is required to automatically launch the app when USB camera is connected. The app does not record any audio. (Without this permission, when USB camera is connected, Android will display the "launch with" prompt, but the "Always" option for USB Camera Viewer will be unavailable)
-
-## Installation
-
-Download and install the **.apk** files from releases page.
-
-Also available on [yaky.dev](https://yaky.dev/apps/usb_camera_viewer).
-
-## Building
-
-This app was built using Android Studio Meerkat 2024.3.1, using OpenJDK 21.0.5.
-
-## Contributing
-
-You are welcome to open issues and PRs for any issues that you find.
-
-I would like to keep this application as simple as possible.
+## How to Use
+1. Host an MJPEG stream on your local network (e.g., via an Raspberry Pi).
+2. Open the Advanced Panel in the app.
+3. Enter the full Stream URL and click "Update & Connect."
+4. The app will automatically save the URL for future sessions.
 
 ## License
-
-Licensed under [Apache License 2.0](LICENSE)
-
-## Acknowledgments
-
-This app uses an updated [uvccamera library](https://uvccamera.org/), hosted on Maven, built by Alexey Pelykh, and licensed under [Apache License 2.0](https://github.com/alexey-pelykh/UVCCamera/blob/main/LICENSE.md). 
-
-The updated library is based on the [original UVCCamera library](https://github.com/saki4510t/UVCCamera) by saki, licensed under [Apache License 2.0](https://github.com/saki4510t/UVCCamera/blob/master/README.md)
-
-App icon is a [Camera icon](https://commons.wikimedia.org/wiki/File:Camera_rounded.svg) from Wikimedia Commons, created by Eduardo López and licensed under [CC-BY-SA-3.0 license](https://creativecommons.org/licenses/by-sa/3.0/deed.en).
+Based on [android-usb-cam-viewer](https://gitlab.com/yaky/android-usb-cam-viewer). Licensed under the [Apache License 2.0](LICENSE).

@@ -2,14 +2,325 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".MainActivity">
 
-    <SurfaceView
+    <android.opengl.GLSurfaceView
         android:id="@+id/camera_surface_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layout_no_signal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#333333"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/camera_surface_view"
+        app:layout_constraintEnd_toEndOf="@+id/camera_surface_view"
+        app:layout_constraintStart_toStartOf="@+id/camera_surface_view"
+        app:layout_constraintTop_toTopOf="@+id/camera_surface_view">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/no_camera"
+            app:tint="#888888" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="NO SIGNAL"
+            android:textColor="#888888"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter correct url"
+            android:textColor="#666666"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ui_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/right_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="#66000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageButton android:id="@+id/btn_quick_zebra" android:src="@drawable/zebra"
+                android:layout_width="40dp" android:layout_height="0dp"
+                android:layout_weight="1" android:layout_marginBottom="8dp"
+                android:backgroundTint="#555555" android:scaleType="centerInside" app:tint="#DDDDDD" />
+
+            <ImageButton android:id="@+id/btn_quick_fc" android:src="@drawable/fc"
+                android:layout_width="40dp" android:layout_height="0dp"
+                android:layout_weight="1" android:layout_marginBottom="8dp"
+                android:backgroundTint="#555555" android:scaleType="centerInside" app:tint="#DDDDDD" />
+
+            <ImageButton android:id="@+id/btn_quick_grid" android:src="@drawable/grid_on"
+                android:layout_width="40dp" android:layout_height="0dp"
+                android:layout_weight="1" android:layout_marginBottom="8dp"
+                android:backgroundTint="#555555" android:scaleType="centerInside" app:tint="#DDDDDD" />
+
+            <ImageButton android:id="@+id/btn_quick_peaking" android:src="@drawable/fp"
+                android:layout_width="40dp" android:layout_height="0dp"
+                android:layout_weight="1" android:layout_marginBottom="8dp"
+                android:backgroundTint="#555555" android:scaleType="centerInside" app:tint="#DDDDDD" />
+
+<!--            <ImageButton android:id="@+id/btn_quick_audio" android:src="@drawable/audio"-->
+<!--                android:layout_width="40dp" android:layout_height="0dp"-->
+<!--                android:layout_weight="1" android:layout_marginBottom="8dp"-->
+<!--                android:backgroundTint="#555555" android:scaleType="centerInside" app:tint="#DDDDDD" />-->
+
+            <ImageButton android:id="@+id/btn_quick_bright" android:src="@drawable/brightness"
+                android:layout_width="40dp" android:layout_height="0dp"
+                android:layout_weight="1" android:layout_marginBottom="8dp"
+                android:backgroundTint="#555555" app:tint="#DDDDDD" android:scaleType="centerInside"/>
+
+            <ImageButton android:id="@+id/btn_quick_scope" android:src="@drawable/parade"
+                android:layout_width="40dp" android:layout_height="0dp"
+                android:layout_weight="1" android:layout_marginBottom="8dp"
+                android:backgroundTint="#555555" app:tint="#DDDDDD" android:scaleType="centerInside"/>
+
+            <ImageButton android:id="@+id/btn_open_settings" android:src="@drawable/settings"
+                android:layout_width="40dp" android:layout_height="0dp"
+                android:layout_weight="1"
+                android:backgroundTint="#DDDDDD" android:scaleType="centerInside" app:tint="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/left_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btn_snapshot"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/snapshot"
+                android:backgroundTint="#88000000"
+                app:tint="#FFFFFF"
+                android:scaleType="centerInside"
+                android:layout_marginBottom="16dp"/>
+
+            <ImageButton
+                android:id="@+id/btn_gallery"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/gallery"
+                android:backgroundTint="#88000000"
+                app:tint="#FFFFFF"
+                android:scaleType="centerInside"/>
+        </LinearLayout>
+
+        <dev.yaky.usbcamviewer.HistogramView
+            android:id="@+id/histogram_view"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_scope_panel"
+            android:padding="8dp"
+            android:visibility="gone"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <dev.yaky.usbcamviewer.ParadeView
+            android:id="@+id/parade_view"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_scope_panel"
+            android:padding="8dp"
+            android:visibility="gone"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ScrollView
+            android:id="@+id/panel_advanced"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:background="#F2111111"
+            android:padding="16dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="ADVANCED TOOLS"
+                        android:textColor="#FF9900"
+                        android:textStyle="bold"
+                        android:textSize="18sp"/>
+
+                    <ImageButton
+                        android:id="@+id/btn_close_panel"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/close"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:scaleType="centerInside"
+                        app:tint="#FFFFFF" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stream URL:"
+                    android:textColor="#FFFFFF"
+                    android:paddingTop="8dp" />
+
+                <EditText
+                    android:id="@+id/et_stream_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="http://10.42.0.1:8080/stream"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#888888"
+                    android:inputType="textUri"
+                    android:backgroundTint="#FF9900" />
+
+                <Button
+                    android:id="@+id/btn_update_stream"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Update &amp; Connect"
+                    android:backgroundTint="#FF9900"
+                    android:textColor="#000000" />
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="IMAGE" android:textColor="#AAAAAA" android:textSize="12sp"/>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#444444" android:layout_marginBottom="10dp"/>
+
+                <Switch android:id="@+id/sw_lut_enable" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Enable LUT" android:textColor="#FFFFFF" android:minHeight="48dp" android:thumbTint="#FF9900" />
+                <Switch android:id="@+id/sw_mirror" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Mirror Mode" android:textColor="#FFFFFF" android:minHeight="48dp" android:thumbTint="#FF9900" />
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="ANAMORPHIC DESQUEEZE" android:textColor="#AAAAAA" android:textSize="12sp" android:layout_marginTop="20dp"/>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#444444" android:layout_marginBottom="10dp"/>
+
+                <RadioGroup android:id="@+id/rg_anamorphic" android:layout_width="match_parent" android:layout_height="wrap_content">
+                    <RadioButton android:id="@+id/rb_ana_off" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Off (1:1)" android:textColor="#FFFFFF" android:checked="true"/>
+                    <RadioButton android:id="@+id/rb_ana_133" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="1.33x (2.39:1)" android:textColor="#FFFFFF"/>
+                    <RadioButton android:id="@+id/rb_ana_155" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="1.55x (2.76:1)" android:textColor="#FFFFFF"/>
+                </RadioGroup>
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="ZEBRA" android:textColor="#AAAAAA" android:textSize="12sp" android:layout_marginTop="10dp"/>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#444444"/>
+                <RadioGroup android:id="@+id/rg_zebra_level" android:layout_width="match_parent" android:layout_height="wrap_content">
+                    <RadioButton android:id="@+id/rb_zebra_95" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="95% (Highlights)" android:textColor="#FFFFFF" android:checked="true"/>
+                    <RadioButton android:id="@+id/rb_zebra_70" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="70% (Skin Tones)" android:textColor="#FFFFFF"/>
+                </RadioGroup>
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="PEAKING COLOR" android:textColor="#AAAAAA" android:textSize="12sp" android:layout_marginTop="10dp"/>
+                <RadioGroup android:id="@+id/rg_peaking_color" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                    <RadioButton android:id="@+id/rb_peak_red" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="RED" android:textColor="#FF4444"/>
+                    <RadioButton android:id="@+id/rb_peak_green" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="GRN" android:textColor="#44FF44" android:checked="true"/>
+                    <RadioButton android:id="@+id/rb_peak_blue" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="BLU" android:textColor="#4444FF"/>
+                </RadioGroup>
+
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="SENSITIVITY" android:textColor="#AAAAAA" android:textSize="12sp" android:layout_marginTop="10dp"/>
+                <SeekBar android:id="@+id/sb_peaking_sens" android:layout_width="match_parent" android:layout_height="wrap_content" android:max="100" android:progress="50"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SCOPES SIZE"
+                    android:textColor="#AAAAAA"
+                    android:textSize="12sp"
+                    android:layout_marginTop="20dp"/>
+
+                <SeekBar
+                    android:id="@+id/sb_scopes_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="300"
+                    android:progress="100"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Optymalizacja wykresów (co ile klatek):" />
+
+                <RadioGroup
+                    android:id="@+id/rg_scope_skip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/rb_skip_1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="1" />
+                    <RadioButton android:id="@+id/rb_skip_10" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="10" />
+                    <RadioButton android:id="@+id/rb_skip_15" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="15" />
+                    <RadioButton android:id="@+id/rb_skip_30" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="30" />
+                </RadioGroup>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <dev.yaky.usbcamviewer.FalseColorLegendView
+            android:id="@+id/legend_false_color"
+            android:layout_width="wrap_content"
+            android:layout_height="220dp"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="70dp"
+            android:background="@drawable/bg_legend"
+            android:padding="12dp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <dev.yaky.usbcamviewer.GridOverlayView
+        android:id="@+id/grid_overlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/camera_surface_view"
+        app:layout_constraintEnd_toEndOf="@+id/camera_surface_view"
+        app:layout_constraintStart_toStartOf="@+id/camera_surface_view"
+        app:layout_constraintTop_toTopOf="@+id/camera_surface_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

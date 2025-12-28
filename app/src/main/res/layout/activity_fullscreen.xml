@@ -1,0 +1,23 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageButton
+        android:id="@+id/btn_delete_fullscreen"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="32dp"
+        android:background="@drawable/bg_circle_delete"
+        android:src="@android:drawable/ic_menu_delete"
+        android:padding="6dp"
+        android:scaleType="fitCenter"
+        app:tint="#88FF0000" />
+</FrameLayout>

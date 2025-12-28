@@ -7,7 +7,7 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId "dev.yaky.usbcamviewer"
+        applicationId "dev.yaky.usbcamviewer.wl"
         minSdk 24
         targetSdk 35
         versionCode 1
@@ -29,7 +29,6 @@ android {
 }
 
 dependencies {
-
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
@@ -38,4 +37,6 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
     implementation libs.uvccameralib
+    implementation libs.glide
+    implementation libs.photoview
 }
